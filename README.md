@@ -13,5 +13,7 @@
                 "addressType": "home",
                 "address": {
                     "streetAddr1": "1 Main St."
+                }
+            }
 }
 ```
