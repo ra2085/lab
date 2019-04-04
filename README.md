@@ -1,19 +1,70 @@
-# Threat Protection
+# Fault Handling
+
+## AM Policy
+```
+<AssignMessage async="false" continueOnError="false" enabled="true" 
+		name="QuotaViolation">
+	<DisplayName>QuotaViolation</DisplayName>
+	<FaultRules/>
+	<Properties/>
+	<Set>
+		<Headers/>
+		<Payload contentType="application/json">
+			{"error":"Quota Violation. Too many requests."}
+		</Payload>
+		<StatusCode>429</StatusCode>
+		<ReasonPhrase>Too Many Requests</ReasonPhrase>
+	</Set>
+	<IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+	<AssignTo createNew="false" transport="http" type="response"/>
+</AssignMessage>
 
 ```
-{
-            "orderNumber": 342345,
-            "lineItems": [
-                { "productId": "ME089LLA", "quantity": 1 },
-                { "productId": "MD388LLA", "quantity": 2 }
-            ],
-            "promisedDeliveryDate": "30 Jul 2018",
-            "deliveryNotes": "If not home, please place inside backyard gate",
-            "destination": {
-                "addressType": "home",
-                "address": {
-                    "streetAddr1": "1 Main St."
-                }
-            }
-}
+## Raise Failt
+
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RaiseFault async="false" continueOnError="false" enabled="true" name="RaiseFaultNotFound">
+    <DisplayName>RaiseFaultNotFound</DisplayName>
+    <Properties/>
+    <FaultResponse>
+        <Set>
+            <Headers/>
+            <Payload contentType="text/plain">
+                   Method "{proxy.pathsuffix}" Not Found
+            </Payload>
+            <StatusCode>404</StatusCode>
+    <ReasonPhrase>Not Found</ReasonPhrase>
+        </Set>
+    </FaultResponse>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</RaiseFault>
+
+```
+
+## Fault rule
+
+```
+<FaultRules>
+		<FaultRule name="QuotaViolation">
+			<Condition>fault.name == "QuotaViolation"</Condition>
+			<Step><Name>QuotaViolation</Name></Step>
+		</FaultRule>
+</FaultRules>
+
+```
+
+## Default Flow
+
+```
+<Flow name="default">
+<Description/>
+<Request>
+<Step>
+	<Name>RaiseFaultNotFound</Name>
+</Step>
+</Request>
+<Response/>
+</Flow>
+
 ```
