@@ -41,3 +41,24 @@ try{
             <Condition>(proxy.pathsuffix MatchesPath "/products") and (request.verb = "GET")</Condition>
         </Flow>
 ```
+## Cache
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ResponseCache async="false" continueOnError="false" enabled="true" name="ResponseCacheProducts">
+    <DisplayName>ResponseCacheProducts</DisplayName>
+    <Properties/>
+    <CacheResource>ProductsCache</CacheResource>
+    <CacheKey>
+        <Prefix/>
+        <KeyFragment ref="request.uri" type="string"/>
+    </CacheKey>
+    <Scope>Exclusive</Scope>
+    <ExpirySettings>
+        <ExpiryDate/>
+        <TimeOfDay/>
+        <TimeoutInSec ref="">3600</TimeoutInSec>
+    </ExpirySettings>
+    <SkipCacheLookup/>
+    <SkipCachePopulation/>
+</ResponseCache>
+```
