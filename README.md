@@ -33,4 +33,25 @@ name="ExtractStoreLatLong">
     <Source clearPayload="false">response</Source>
 </ExtractVariables>
 ```
+## Service Callout
 
+```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="ServiceCalloutGeoLoc">
+    <DisplayName>ServiceCalloutGeoLoc</DisplayName>
+    <Properties/>
+    <Request>
+        <Set>
+            <QueryParams>
+                <QueryParam name="latlng">{lat},{long}</QueryParam>
+                <QueryParam name="key">AIzaSyChgAv3onpLi5WN4NYioJh7ReUTkiwJmuo</QueryParam>
+            </QueryParams>
+        </Set>
+    </Request>
+    <Response>calloutResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>https://maps.googleapis.com/maps/api/geocode/json</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>
+```
