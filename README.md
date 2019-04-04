@@ -2,6 +2,7 @@
 
 ## AM Policy
 ```
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <AssignMessage async="false" continueOnError="false" enabled="true" 
 		name="QuotaViolation">
 	<DisplayName>QuotaViolation</DisplayName>
