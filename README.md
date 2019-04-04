@@ -31,3 +31,13 @@ try{
     context.setVariable('mashupAddressSuccess', false);
 }
 ```
+## GET /products
+
+```
+<Flow name="GetProducts">
+            <Description/>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/products") and (request.verb = "GET")</Condition>
+        </Flow>
+```
