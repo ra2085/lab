@@ -55,3 +55,9 @@ name="ExtractStoreLatLong">
     </HTTPTargetConnection>
 </ServiceCallout>
 ```
+
+## Condition
+
+```
+<Condition>(lat != null) and (long != null)</Condition>
+```
